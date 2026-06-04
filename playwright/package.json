@@ -1,0 +1,19 @@
+{
+  "name": "hsad-playwright",
+  "version": "1.0.0",
+  "description": "HSAD Playwright E2E tests",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test --config ./playwright.config.js",
+    "test:headed": "npx playwright test --config ./playwright.config.js --headed",
+    "test:ui": "npx playwright test --config ./playwright.config.js --ui"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.0",
+    "playwright": "^1.57.0"
+  }
+}
