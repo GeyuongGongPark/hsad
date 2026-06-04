@@ -15,6 +15,10 @@ export const SELECTORS = {
             SUBMIT_BUTTON: 'button[type="submit"], input[type="submit"]',
         },
         SERVICE: {
+            EMAIL_INPUT: 'input[id="email"]',
+            PASSWORD_INPUT: 'input[id="password"]',
+            SUBMIT_BUTTON: 'button[type="submit"]',
+            LOGOUT: 'img[alt="이동"]',
             READY: '[data-tid]',
         },
         EMAIL_INPUT: 'input[id="email"]',

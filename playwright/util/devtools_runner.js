@@ -199,7 +199,6 @@ function _expectChain(subject, label, soft) {
         toBeGreaterThan:    (n) => { if (!(subject > n)) fail(`${subject} > ${n} 실패`); },
         toBeLessThanOrEqual:(n) => { if (!(subject <= n)) fail(`${subject} <= ${n} 실패`); },
         toMatch:            (re) => { if (!String(subject).match(re)) fail(`toMatch: "${subject}" ≠ ${re}`); },
-        toBeVisible:        async () => { const v = typeof subject?.isVisible === 'function' ? await subject.isVisible() : _isVisible(subject); if (!v) fail(`toBeVisible 실패`); },
     };
     return chain;
 }

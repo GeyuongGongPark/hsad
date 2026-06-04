@@ -143,9 +143,9 @@ export default async function () {
         }
       }
       return page;
-    }
-    finally {
-
+    } catch (e) {
+        if (page) await page.close();
+        throw e;
     }
 }
 

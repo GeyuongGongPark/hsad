@@ -7,6 +7,48 @@ import { wait } from './utils.js';
 const CLM = SELECTORS.BUSINESS.CLM;
 
 /**
+ * 보안 여부, 검토 진행 여부, 계약 검토 요청 공통 처리
+ * (clm_draft.new / change / stop 공통 사용)
+ * @param {import('@playwright/test').Page} page
+ * @param {string} timestamp
+ */
+export async function applySecurityAndReviewSettings(page, timestamp) {
+    // 보안 여부
+    if (process.env.SECURITY_TYPE === 'all') {
+        await page.waitForSelector(CLM.SECURITY_ALL_LABEL, { state: 'visible', timeout: 5000 });
+        await page.locator(CLM.SECURITY_ALL_LABEL).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_all.png` });
+    } else if (process.env.SECURITY_TYPE === 'refer') {
+        await page.locator(CLM.SECURITY_REFER_LABEL).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_refer.png` });
+    } else {
+        await page.locator(CLM.SECURITY_PRIVATE_LABEL).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_hidden.png` });
+    }
+
+    // 검토 진행 여부
+    if (process.env.REVIEW_TYPE === 'use') {
+        await page.locator(CLM.REVIEW_NEEDED_LABEL).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_review.png` });
+    } else {
+        await page.locator(CLM.REVIEW_NOT_NEEDED_LABEL).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_noreview.png` });
+    }
+
+    // 계약 검토 요청
+    if (process.env.APPROVAL_SET === 'use') {
+        await page.locator(CLM.ADD_APPROVER_ICON).click();
+    } else {
+        await page.locator(CLM.CONTRACT_REVIEW_REQUEST_BTN).click();
+        await page.screenshot({ path: `screenshots/${timestamp}_creat.png` });
+        await clickFooterConfirm(page);
+        await page.screenshot({ path: `screenshots/${timestamp}_assignees.png` });
+        await page.waitForURL(/\/clm\/[^/]+\/draft/, { timeout: 15000 });
+        await page.screenshot({ path: `screenshots/${timestamp}_new_contract.png` });
+    }
+}
+
+/**
  * footer-safe-area 모달의 확인 버튼 클릭
  * @param {import('@playwright/test').Page} page
  */
