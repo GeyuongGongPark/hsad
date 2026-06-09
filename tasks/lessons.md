@@ -470,6 +470,28 @@ JS props(`width={600}`)로 고정 픽셀을 전달하면 반응형 통일이 어
 
 ---
 
+### HSAD CLM 코드 검수 — 재발 방지 패턴
+
+**스크린샷 파일명 중복**
+- 같은 timestamp 변수를 재사용하면서 suffix만 바꾸지 않으면 동일 파일명으로 덮어씀
+- 분기마다 고유한 suffix 사용: `_related_contract_search.png`, `_related_contract_select.png` 등
+
+**조건 분기 외부 로직이 블록 안에 묻히는 구조 버그**
+- "항상 실행해야 하는 로직"이 `if (ENV === 'x')` 블록 안에만 있으면, ENV가 다를 때 전혀 실행되지 않음
+- 계약 구분 선택처럼 필수 선행 단계는 조건 블록 밖으로 꺼낼 것
+
+**빈 finally 블록 → catch 사용**
+- `try { ... } finally {}` 패턴은 에러 발생 시 정리 코드가 실행되지 않음
+- 리소스 해제(`page.close()`)가 필요하면 `catch (e) { if (page) await page.close(); throw e; }` 패턴 사용
+- k6 browser 스크립트에서 page leak 방지에 필수
+
+**공통 함수 추출 기준**
+- 3개 이상의 파일에서 동일한 코드 블록이 반복되면 공통 함수로 추출
+- 추출 시 `helpers.js`에 추가하고 각 파일의 import에 포함
+- 환경변수 기반 분기(SECURITY_TYPE, REVIEW_TYPE, APPROVAL_SET)처럼 복합 조건 블록이 대표적 추출 대상
+
+---
+
 ### box-shadow 일괄 제거 시 transition 참조도 함께 정리
 
 `box-shadow:` 속성을 제거해도 `transition: border-color 0.15s, box-shadow 0.15s;`처럼 transition에 섞인 참조가 남는다.

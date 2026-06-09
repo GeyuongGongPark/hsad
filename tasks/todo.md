@@ -309,6 +309,26 @@ console.log(`... ${duration}ms`);
 
 ---
 
+# Task: HSAD Playwright + Performance 코드 검수 수정 (2회차)
+
+## 버그 수정
+- [x] clm_draft.change.js: 스크린샷 3곳이 동일 파일명으로 덮어쓰기 → 고유 이름으로 수정
+- [x] clm_draft.stop.js: 해지 계약 구분 선택 로직이 CONTRACT_UPLOAD 블록 안에만 있어 미실행 → 블록 밖으로 이동
+- [x] performance/clm_draft.new.js: 빈 finally 블록으로 에러 시 page.close() 미호출 → catch로 교체
+- [x] playwright selector_hsad.js: LOGIN.SERVICE에 필드 누락 → performance 버전과 동일하게 추가
+
+## 코드 품질 수정
+- [x] devtools_runner.js: toBeVisible 중복 정의 → 두 번째 제거
+- [x] clm_draft.new/change/stop.js: waitForTimeout(10000) → waitForURL 조건 대기로 교체
+- [x] clm_draft.new/change/stop.js: 보안/검토/요청 중복 블록 → applySecurityAndReviewSettings() 공통 함수 추출
+- [x] helpers.js: applySecurityAndReviewSettings() 공통 함수 추가
+
+## multi 폴더 삭제
+- [x] playwright/clm/multi/ 전체 삭제 (10개 파일)
+- [x] performance/clm/multi/ 전체 삭제 (10개 파일)
+
+---
+
 # Task: HSAD performance 스크립트 코드 검수 수정
 
 ## P0 — 런타임 오류

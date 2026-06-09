@@ -90,6 +90,28 @@ export const CONTRACT_URLS = {
     WATERMARK: `${BASE_URL}/template?type=watermark`
 };
 
+// 사내 공지사항 관련 URL
+export const INTERNAL_NOTICE_URLS = {
+    LIST:   `${BASE_URL}/internal_notice`,
+    CREATE: `${BASE_URL}/internal_notice/create`,
+    DETAIL: `${BASE_URL}/internal_notice`,
+};
+
+// 비밀번호 재설정 관련 URL
+export const RESET_PASSWORD_URLS = {
+    RESET_PASSWORD: `${BASE_URL}/reset_password`,
+};
+
+// 법률 서비스 관련 URL
+export const LEGAL_DRAFT_URLS = {
+    LEGAL_DRAFT: `${BASE_URL}/legal_draft`,
+};
+
+// 법률 문의 관련 URL
+export const LEGAL_INQUIRY_URLS = {
+    LEGAL_INQUIRY: `${BASE_URL}/legal_inquiry`,
+};
+
 // 시스템 설정 관련 URL
 export const SETTING_URLS = {
     TEAM: `${BASE_URL}/teams`,
@@ -116,5 +138,9 @@ export const URLS = {
     LAW: LAW_URLS,
     PROJECT: PROJECT_URLS,
     CONTRACT: CONTRACT_URLS,
-    SETTING: SETTING_URLS
+    SETTING: SETTING_URLS,
+    INTERNAL_NOTICE: INTERNAL_NOTICE_URLS,
+    RESET_PASSWORD: RESET_PASSWORD_URLS,
+    LEGAL_DRAFT: LEGAL_DRAFT_URLS,
+    LEGAL_INQUIRY: LEGAL_INQUIRY_URLS
 };
