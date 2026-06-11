@@ -8,10 +8,6 @@ export const options = hsadBrowserOptions;
 
 const CLM = SELECTORS.BUSINESS.CLM;
 
-async function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export async function runSeal(page) {
     const getNewTimestamp = () => getFormattedTimestamp().replace(/:/g, '_');
 
@@ -30,7 +26,7 @@ export async function runSeal(page) {
     await page.locator(CLM.BUTTON_RECIPIENT).click();
     await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
     await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-    await wait(3000);
+    await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_seal_requested.png` });
 }

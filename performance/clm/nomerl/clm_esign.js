@@ -9,10 +9,6 @@ export const options = hsadBrowserOptions;
 
 const CLM = SELECTORS.BUSINESS.CLM;
 
-async function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export default async function () {
     const getNewTimestamp = () => getFormattedTimestamp().replace(/:/g, '_');
     let page;
@@ -42,7 +38,7 @@ export default async function () {
             await page.locator(CLM.START_BUTTON).click();
             await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
             await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-            await wait(3000);
+            await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
             timestamp = getNewTimestamp();
             await page.screenshot({ path: `screenshots/${timestamp}_esign_started.png` });
 
@@ -67,7 +63,7 @@ export default async function () {
         await page.locator(CLM.SAVE_BUTTON).click();
         await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
         await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-        await wait(3000);
+        await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_original_registered.png` });
 
@@ -83,7 +79,7 @@ export default async function () {
         await page.locator(CLM.DONE_DISUSE).click();
         await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
         await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-        await wait(3000);
+        await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_contract_done.png` });
     } finally {

@@ -6,10 +6,6 @@ import { getFormattedTimestamp } from "@tms/performance/common/utils.js";
 
 export const options = hsadBrowserOptions;
 
-async function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export default async function () {
   const getNewTimestamp = () => getFormattedTimestamp().replace(/:/g, '_');
   let page;
@@ -31,7 +27,6 @@ export default async function () {
     await page.waitForSelector('//div[contains(@class,"footer-safe-area")]//button[text()="확인" and not(@disabled)]');
     await page.locator('//div[contains(@class,"footer-safe-area")]//button[text()="확인"]').click();
     timestamp = getNewTimestamp();
-    await wait(10000);
     await page.screenshot({path: `screenshots/${timestamp}_after_confirm.png`});
     //자문 분류 선택
     await page.waitForSelector('//img[@alt="arrow"]');

@@ -8,10 +8,6 @@ export const options = hsadBrowserOptions;
 
 const CLM = SELECTORS.BUSINESS.CLM;
 
-async function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export default async function () {
     const getNewTimestamp = () => getFormattedTimestamp().replace(/:/g, '_');
     let page;
@@ -41,7 +37,7 @@ export default async function () {
         await page.locator(CLM.BUTTON_FINAL_APPROVAL_REQUEST).click();
         await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
         await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-        await wait(3000);
+        await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_final_approval_requested.png` });
 
@@ -56,7 +52,7 @@ export default async function () {
         await page.locator(CLM.BUTTON_APPROVAL).click();
         await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
         await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-        await wait(3000);
+        await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' });
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_final_approval_done.png` });
     } finally {

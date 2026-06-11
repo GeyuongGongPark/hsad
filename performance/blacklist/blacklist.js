@@ -9,10 +9,6 @@ export const options = hsadBrowserOptions;
 
 const CLM = SELECTORS.BUSINESS.CLM;
 
-async function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 export default async function () {
     const getNewTimestamp = () => getFormattedTimestamp().replace(/:/g, '_');
     let page;
@@ -31,7 +27,7 @@ export default async function () {
         await page.locator(CLM.NEW_REVIEW_REQUEST_BUTTON).click();
         await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
         await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
-        await wait(5000);
+        await page.waitForLoadState('networkidle');
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_blacklist_draft_form.png` });
 
@@ -69,7 +65,7 @@ export default async function () {
             });
 
             await page.locator(CLM.BLACKLIST_SPECIAL_APPROVE_BUTTON).click();
-            await wait(5000);
+            await page.waitForLoadState('networkidle');
 
             const hasApprovalRequestedStatus = await page.locator('text=특별 승인 요청 중').isVisible();
             check(page, {
