@@ -73,8 +73,8 @@ export async function run(page) {
     await page.screenshot({ path: `screenshots/${timestamp}_internal_notice_edit.png` });
 
     // 수정 페이지: 미리보기, 취소 버튼 확인
-    await page.locator(PREVIEW_BUTTON).isVisible();
-    await page.locator(CANCEL_BUTTON_1).isVisible();
+    await page.waitForSelector(PREVIEW_BUTTON);
+    await page.waitForSelector(CANCEL_BUTTON_1);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_internal_notice_edit_buttons.png` });
 

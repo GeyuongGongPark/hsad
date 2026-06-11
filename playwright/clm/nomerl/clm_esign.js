@@ -8,7 +8,7 @@
  */
 import { URLS } from '../../util/url_base_hsad.js';
 import { SELECTORS } from '../../util/selector_hsad.js';
-import { getFormattedTimestamp, wait } from '../../util/utils.js';
+import { getFormattedTimestamp } from '../../util/utils.js';
 import { getCredentials, loginWithPage } from '../../login/login_helper.js';
 import { run as runSeal } from './clm_seal.js';
 import { clickFooterConfirm } from '../../util/helpers.js';
@@ -44,7 +44,6 @@ export async function run(page) {
         await page.waitForSelector(CLM.START_BUTTON);
         await page.locator(CLM.START_BUTTON).click();
         await clickFooterConfirm(page);
-        await wait(3000);
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_esign_started.png` });
 
@@ -69,7 +68,6 @@ export async function run(page) {
     await page.waitForSelector(CLM.SAVE_BUTTON);
     await page.locator(CLM.SAVE_BUTTON).click();
     await clickFooterConfirm(page);
-    await wait(3000);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_original_registered.png` });
 
@@ -84,7 +82,6 @@ export async function run(page) {
     await page.waitForSelector(CLM.DONE_DISUSE);
     await page.locator(CLM.DONE_DISUSE).click();
     await clickFooterConfirm(page);
-    await wait(3000);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_contract_done.png` });
 }

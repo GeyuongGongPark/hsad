@@ -524,3 +524,39 @@ await expect(page).toHaveURL(/.+/);
 `box-shadow:` 속성을 제거해도 `transition: border-color 0.15s, box-shadow 0.15s;`처럼 transition에 섞인 참조가 남는다.
 - `/box-shadow:/d` 로 속성 줄 제거 후, `grep -rn "box-shadow"` 로 transition 잔여 참조 확인 및 제거
 
+---
+
+### Playwright - wait(N) 제거 패턴
+
+**공통 헬퍼에서 hidden 대기를 처리하면 하위 wait() 일괄 제거 가능**:
+- `clickFooterConfirm`에 `locator(FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden', timeout: 10000 })` 추가
+- 이 헬퍼를 호출하는 모든 파일의 후속 `await wait(3000)` 제거 가능
+- 파일별 개별 수정보다 공통 함수 1곳 수정이 훨씬 효율적
+
+**미사용 import 연쇄 정리**:
+- `wait()` 제거 후 해당 파일의 import에서 `wait`도 제거할 것
+- `import { getFormattedTimestamp, wait }` → `import { getFormattedTimestamp }`
+
+**`waitForTimeout` vs 조건 대기**:
+- `page.waitForTimeout(N)` → 가능하면 `waitForLoadState('networkidle')` 또는 `waitForSelector`로 교체
+- 외부 액션 후 폼 로드 대기: `waitForLoadState('networkidle')` 적절
+
+### Playwright - locator().isVisible() 미사용 반환값
+
+`await page.locator(SEL).isVisible()` 는 boolean을 반환하지만 변수에 할당하지 않으면 아무 효과 없음.
+- 바로 위에 `waitForSelector`가 있으면 이 줄은 완전히 불필요 → 제거
+- 대기 역할로 쓰려면 `await page.waitForSelector(SEL)` 사용
+- 조건 분기로 쓰려면 `if (await page.locator(SEL).isVisible()) { ... }` 패턴 유지
+
+### Playwright - XPath 인라인 대신 SELECTORS 참조
+
+`page.locator('//label[.//div[text()="신규"]]')` 같은 XPath를 spec 파일에 직접 쓰면 selector 변경 시 일일이 찾아 수정해야 함.
+- `selector_hsad.js`에 이미 `DRAFT_TYPE_NEW_LABEL`, `SECURITY_ALL_LABEL` 등 명명된 selector 있음
+- spec 파일에서는 항상 `SELECTORS.BUSINESS.CLM.*` 참조 사용
+
+### Playwright - URL assertion 구체화
+
+`toHaveURL(/\/clm/)` 는 `/clm` 경로를 포함하면 모두 통과 → 홈 페이지 체크 수준.
+- 이메일 링크 → 계약 검토 상세 이동: `/\/clm\/review/` 로 구체화
+- 계약명 클릭 → 상세 이동: `/\/clm\/[^/]+/` (하위 경로 있어야 함)로 구체화
+

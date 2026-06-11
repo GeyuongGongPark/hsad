@@ -7,7 +7,7 @@
  */
 import { URLS } from '../../util/url_base_hsad.js';
 import { SELECTORS } from '../../util/selector_hsad.js';
-import { getFormattedTimestamp, wait } from '../../util/utils.js';
+import { getFormattedTimestamp } from '../../util/utils.js';
 import { run as runDraft } from './clm_draft.js';
 import { clickFooterConfirm } from '../../util/helpers.js';
 
@@ -35,7 +35,6 @@ export async function run(page) {
         await page.waitForSelector(CLM.BUTTON_APPROVAL);
         await page.locator(CLM.BUTTON_APPROVAL).click();
         await clickFooterConfirm(page);
-        await wait(3000);
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_internal_approval_done.png` });
     }
@@ -50,7 +49,6 @@ export async function run(page) {
     await page.waitForSelector(CLM.ASSIGN_BUTTON);
     await page.locator(CLM.ASSIGN_BUTTON).click();
     await clickFooterConfirm(page);
-    await wait(3000);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_assigned.png` });
 

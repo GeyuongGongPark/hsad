@@ -29,8 +29,7 @@ export async function run(page) {
     let timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_legal_draft_list.png` });
 
-    // 2. 버튼 표시 확인
-    await page.locator(BUTTON).isVisible();
+    // 2. 버튼 표시 확인 (waitForSelector에서 이미 검증됨)
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_legal_draft_button_visible.png` });
 

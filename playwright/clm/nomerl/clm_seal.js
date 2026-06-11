@@ -4,7 +4,7 @@
  */
 import { URLS } from '../../util/url_base_hsad.js';
 import { SELECTORS } from '../../util/selector_hsad.js';
-import { getFormattedTimestamp, wait } from '../../util/utils.js';
+import { getFormattedTimestamp } from '../../util/utils.js';
 import { getCredentials, loginWithPage } from '../../login/login_helper.js';
 import { clickFooterConfirm } from '../../util/helpers.js';
 
@@ -33,7 +33,6 @@ export async function run(page) {
     await page.waitForSelector(CLM.BUTTON_RECIPIENT);
     await page.locator(CLM.BUTTON_RECIPIENT).click();
     await clickFooterConfirm(page);
-    await wait(3000);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_seal_requested.png` });
 }

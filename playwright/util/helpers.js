@@ -55,6 +55,7 @@ export async function applySecurityAndReviewSettings(page, timestamp) {
 export async function clickFooterConfirm(page) {
     await page.waitForSelector(CLM.FOOTER_CONFIRM_BUTTON);
     await page.locator(CLM.FOOTER_CONFIRM_BUTTON).click();
+    await page.locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden', timeout: 10000 });
 }
 
 /**
@@ -70,6 +71,7 @@ export async function uploadContractFromLibrary(page, timestamp) {
     try {
         await page.waitForSelector('img[src*="loading.gif"]', { state: 'hidden', timeout: 20000 });
     } catch (_) {
+        console.warn('[helpers] loading.gif 숨김 대기 타임아웃 — 계속 진행');
         await page.screenshot({ path: `screenshots/${timestamp}_loading_timeout.png` });
     }
 
@@ -83,11 +85,15 @@ export async function uploadContractFromLibrary(page, timestamp) {
 
     try {
         await page.waitForSelector('img[src*="loading.gif"]', { state: 'hidden', timeout: 20000 });
-    } catch (_) {}
+    } catch (_) {
+        // 로딩 이미지가 이미 사라졌거나 처음부터 없는 경우 — 무시하고 계속 진행
+    }
 
     try {
         await page.waitForSelector('//div[text()="문서 불러오기"]', { state: 'hidden', timeout: 10000 });
-    } catch (_) {}
+    } catch (_) {
+        // 팝업이 이미 닫혔거나 처음부터 없는 경우 — 무시하고 계속 진행
+    }
 
     await wait(500);
 }

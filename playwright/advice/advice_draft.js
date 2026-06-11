@@ -3,7 +3,7 @@
  */
 import { URLS } from '../util/url_base_hsad.js';
 import { SELECTORS } from '../util/selector_hsad.js';
-import { getFormattedTimestamp, wait } from '../util/utils.js';
+import { getFormattedTimestamp } from '../util/utils.js';
 import { getCredentials, loginWithPage } from '../login/login_helper.js';
 import { clickFooterConfirm } from '../util/helpers.js';
 
@@ -32,7 +32,6 @@ export async function run(page) {
     // 법률 자문 요청 모달 확인 btn 클릭
     await clickFooterConfirm(page);
     timestamp = getNewTimestamp();
-    await wait(10000);
     await page.screenshot({ path: `screenshots/${timestamp}_after_confirm.png` });
 
     // 자문 분류 선택

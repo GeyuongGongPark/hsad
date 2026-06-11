@@ -389,3 +389,35 @@ console.log(`... ${duration}ms`);
 - GNB_click.js 재작성 스펙
 - clm_process.js 각 조건 분기 구현 내용
 - multi VU/iterations 적절한 설정값
+
+---
+
+# Task: HSAD Playwright 전체 코드 리뷰 및 Warning/Info 수정
+
+## 배경
+전체 Playwright E2E 테스트 시니어 엔지니어 수준 코드 리뷰 → Critical은 사용자 판단, Warning/Info 전체 수정.
+
+## Warning/Info 수정 완료
+- [x] `helpers.js`: `clickFooterConfirm`에 `waitFor({ state: 'hidden' })` 추가 → 하위 wait(3000) 불필요
+- [x] `clm_process.js`, `clm_esign.js`, `clm_final.js`, `clm_legal.js`, `clm_seal.js`, `clm_financial.js`: `await wait(3000)` 제거
+- [x] 위 6개 파일 + `advice_draft.js`: 미사용 `wait` import 제거
+- [x] `clm_draft.new.spec.js`: 인라인 XPath 10개 → `SELECTORS.BUSINESS.CLM.*` 교체, TODO 주석 제거
+- [x] `legal_inquiry.js`, `legal_draft.js`: 미사용 `await page.locator().isVisible()` 제거
+- [x] `internal_notice.js`: `locator().isVisible()` → `waitForSelector()` 교체
+- [x] `blacklist.spec.js`: `/\/clm/` → `/\/clm\/review/` (4개)
+- [x] `dashboard_onprem.spec.js`: `/\/clm/` → `/\/clm\/[^/]+/`
+- [x] `advice_draft.js`: `await wait(10000)` 제거
+- [x] `blacklist.js`: `waitForTimeout(5000)` → `waitForLoadState('networkidle')` (2개)
+
+## k6 동기화 완료
+- [x] `performance/blacklist/blacklist.js`: check() 추가 (BL_001~005)
+- [x] `performance/clm/nomerl/clm_financial_review.js`: 신규 (FR_001~007)
+- [x] `performance/clm/nomerl/clm_seal_approval.js`: 신규 (SA_001~009)
+- [x] `performance/clm/nomerl/clm_groupware.js`: 신규 (GW_001~007)
+- [x] `performance/clm/nomerl/clm_search_filter.js`: 신규 (SF_001~006)
+- [x] `performance/dashboard/dashboard_onprem.js`: 신규 (DO_001~006)
+
+## Critical (사용자 판단 보류)
+- `clm_groupware.spec.js` beforeEach: 로그인 후 그룹웨어 연동 페이지 진입 로직 구현 필요
+- `blacklist.spec.js`: 이메일 링크 클릭 시뮬레이션 TC 사전 조건 불명확
+- 일부 spec에서 `page.waitForTimeout` 사용 여전히 남아있을 수 있음

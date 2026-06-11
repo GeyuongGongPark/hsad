@@ -31,16 +31,14 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
         });
 
         test('LC_040~LC_043: 계약 구분 라디오 (신규/변경/해지) 노출, 신규 디폴트', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await expect(page.locator('//label[.//div[text()="신규"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="변경"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="해지"]]')).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.DRAFT_TYPE_NEW_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.DRAFT_TYPE_CHANGE_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.DRAFT_TYPE_STOP_LABEL)).toBeVisible();
         });
 
         test('LC_044~LC_046: 편집기 사용 여부 라디오 (사용/사용 안함) 노출', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await expect(page.locator('//label[.//div[text()="사용"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="사용 안 함"]]')).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.EDITOR_USE_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.EDITOR_NOT_USE_LABEL)).toBeVisible();
         });
 
         test('LC_047~LC_048: 계약서 첨부 방식 라디오 노출', async ({ page }) => {
@@ -71,10 +69,9 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
         });
 
         test('LC_061~LC_063: 보안 여부 라디오 (전체공개/참조인/비공개) 노출, "참조인" 디폴트', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await expect(page.locator('//label[.//div[text()="전체 공개"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="참조인"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="비공개"]]')).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.SECURITY_ALL_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.SECURITY_REFER_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.SECURITY_PRIVATE_LABEL)).toBeVisible();
         });
 
         test('LC_064~LC_067: 프로젝트, 연관 계약 찾아보기 버튼 노출', async ({ page }) => {
@@ -95,9 +92,8 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
         });
 
         test('LC_089~LC_091: 검토 진행 여부 라디오 (검토필요/검토불필요) 노출, "검토 필요" 디폴트', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await expect(page.locator('//label[.//div[text()="검토 필요"]]')).toBeVisible();
-            await expect(page.locator('//label[.//div[text()="검토 불필요"]]')).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.REVIEW_NEEDED_LABEL)).toBeVisible();
+            await expect(page.locator(SELECTORS.BUSINESS.CLM.REVIEW_NOT_NEEDED_LABEL)).toBeVisible();
         });
 
         test('LC_092~LC_093: 검토 마감 기한 datepicker 노출', async ({ page }) => {
@@ -149,14 +145,12 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
 
     test.describe('동작 - 계약 구분', () => {
         test('LC_계약구분_해지: 해지 선택 시 "관련 계약 찾아보기" 노출', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="해지"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.DRAFT_TYPE_STOP_LABEL).click();
             await expect(page.getByText('관련 계약 찾아보기')).toBeVisible();
         });
 
         test('LC_계약구분_변경: 변경 선택 시 "관련 계약 찾아보기" 노출', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="변경"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.DRAFT_TYPE_CHANGE_LABEL).click();
             await expect(page.getByText('관련 계약 찾아보기')).toBeVisible();
         });
     });
@@ -176,13 +170,11 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
         });
 
         test('LC_보안여부_전체공개: 전체 공개 선택', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="전체 공개"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.SECURITY_ALL_LABEL).click();
         });
 
         test('LC_보안여부_비공개: 비공개 선택', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="비공개"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.SECURITY_PRIVATE_LABEL).click();
         });
 
         test('LC_계약분류_대분류: 대분류 드롭다운 선택 시 중분류 활성화', async ({ page }) => {
@@ -201,14 +193,12 @@ test.describe('CLM 계약 검토 요청 - 요청 페이지(Draft)', () => {
 
     test.describe('동작 - 검토 정보', () => {
         test('LC_검토불필요: 검토 불필요 선택 시 검토 마감 기한 비활성화', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="검토 불필요"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.REVIEW_NOT_NEEDED_LABEL).click();
             await expect(page.locator(SELECTORS.BUSINESS.CLM.DATE_PLACEHOLDER_1)).toBeDisabled();
         });
 
         test('LC_검토필요: 검토 필요 선택 시 검토 마감 기한 활성화', async ({ page }) => {
-            // TODO: Radio 컴포넌트 data-tid 없음
-            await page.locator('//label[.//div[text()="검토 필요"]]').click();
+            await page.locator(SELECTORS.BUSINESS.CLM.REVIEW_NEEDED_LABEL).click();
             await expect(page.locator(SELECTORS.BUSINESS.CLM.DATE_PLACEHOLDER_1)).toBeEnabled();
         });
     });

@@ -7,7 +7,7 @@
  */
 import { URLS } from '../../util/url_base_hsad.js';
 import { SELECTORS } from '../../util/selector_hsad.js';
-import { getFormattedTimestamp, wait } from '../../util/utils.js';
+import { getFormattedTimestamp } from '../../util/utils.js';
 import { getCredentials, loginWithPage } from '../../login/login_helper.js';
 import { clickFooterConfirm } from '../../util/helpers.js';
 
@@ -43,7 +43,6 @@ export async function run(page) {
     await page.waitForSelector(CLM.COMPLETE_REVIEW_BUTTON);
     await page.locator(CLM.COMPLETE_REVIEW_BUTTON).click();
     await clickFooterConfirm(page);
-    await wait(3000);
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_finance_review_done.png` });
 }

@@ -219,7 +219,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 검토 담당자 �
         });
 
         test('LC_181: 계약명 클릭 - 계약명 클릭 시 계약 상세 이동', async ({ page }) => {
-            await expect(page).toHaveURL(/\/clm/);
+            await expect(page).toHaveURL(/\/clm\/[^/]+/);
         });
 
         test('LC_182: [배정] 버튼 - 배정 버튼 클릭 시 조직도 노출', async ({ page }) => {

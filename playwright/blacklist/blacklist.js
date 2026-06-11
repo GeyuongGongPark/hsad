@@ -31,7 +31,7 @@ export async function run(page) {
     // 신규 검토 요청 클릭
     await page.locator(CLM.NEW_REVIEW_REQUEST_BUTTON).click();
     await clickFooterConfirm(page);
-    await page.waitForTimeout(5000);
+    await page.waitForLoadState('networkidle');
     timestamp = getNewTimestamp();
     await page.screenshot({ path: `screenshots/${timestamp}_blacklist_draft_form.png` });
 
@@ -53,7 +53,7 @@ export async function run(page) {
         const approvalBtn = page.getByRole('button', { name: '특별 승인 요청' });
         if (await approvalBtn.isEnabled()) {
             await approvalBtn.click();
-            await page.waitForTimeout(5000);
+            await page.waitForLoadState('networkidle');
             timestamp = getNewTimestamp();
             await page.screenshot({ path: `screenshots/${timestamp}_blacklist_approval_requested.png` });
         }

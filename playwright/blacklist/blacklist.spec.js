@@ -176,7 +176,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_245: 메일 진입 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/\/clm/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
         test('LC_246: 계약 검토 요청 상세 페이지 - 윤리사무국 담당자 > 특별 승인 요청 중 문서 상세 페이지 진입', async ({ page }) => {
@@ -203,7 +203,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_251: 메일 진입 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/\/clm/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
         test('LC_252: 계약 검토 요청 상세 페이지 - 윤리사무국 담당자 > 특별 승인 요청 중 문서 상세 페이지 진입', async ({ page }) => {
@@ -272,7 +272,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_264: 메일 발송 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/\/clm/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
         test('LC_265: 문서 상태 - 결재선 설정', async ({ page }) => {
@@ -323,7 +323,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_276: 메일 발송 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/\/clm/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
         test('LC_277: 문서 상태 - 특별 승인 거부 처리 후 문서 상태 전이', async ({ page }) => {
