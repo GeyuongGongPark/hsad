@@ -307,7 +307,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
             await expect(page.getByText('해당 특별 승인 요청 완료된 문서 항목', { exact: false })).toBeVisible();
         });
 
-        test('LC_273: 검토 요청 조회 - 문서 미관련자\n(권한 보유)', async ({ page }) => {
+        test('LC_273: 검토 요청 조회 - 문서 미관련자 (권한 보유)', async ({ page }) => {
             await expect(page.getByText('해당 특별 승인 요청 완료된 문서 항목', { exact: false })).toBeVisible();
         });
 
