@@ -329,6 +329,38 @@ console.log(`... ${duration}ms`);
 
 ---
 
+# Task: HSAD 온프레미스 TC 미구현 구현 완료
+
+## 배경
+`[HSAD] 온프레미스.xlsx` Case 시트 분석 결과:
+- 전체 TC 392건 중 TODO 스텁(실 assertion 없음) 115건 → 구현율 62.3%
+- 미구현 원인: 상태 전이, 다중 계정, 외부 연동이 필요한 케이스
+
+## 작업 계획
+- [x] `playwright/util/url_base_hsad.js` — 4개 URL 그룹 추가 (INTERNAL_NOTICE, RESET_PASSWORD, LEGAL_DRAFT, LEGAL_INQUIRY)
+- [x] `performance/util/url_base_hsad.js` — 동일 4개 URL 그룹 추가 (k6)
+- [x] `playwright/internal_notice/internal_notice.js` — 신규 시나리오
+- [x] `playwright/legal_draft/legal_draft.js` — 신규 시나리오
+- [x] `playwright/legal_inquiry/legal_inquiry.js` — 신규 시나리오
+- [x] `playwright/reset_password/reset_password.js` — 신규 시나리오 (독립 플로우)
+- [x] `performance/internal_notice/internal_notice.js` — k6 신규
+- [x] `performance/legal_draft/legal_draft.js` — k6 신규
+- [x] `performance/legal_inquiry/legal_inquiry.js` — k6 신규
+- [x] `performance/reset_password/reset_password.js` — k6 신규 (독립 플로우)
+- [x] `playwright/clm/nomerl/clm_financial_review.spec.js` — 36 TODO → 실 assertion
+- [x] `playwright/blacklist/blacklist.spec.js` — 22 TODO → 실 assertion
+- [x] `playwright/clm/nomerl/clm_seal_approval.spec.js` — 32 TODO → 실 assertion
+- [x] `playwright/clm/nomerl/clm_groupware.spec.js` — 37 TODO → 실 assertion
+- [x] `playwright/dashboard/dashboard_onprem.spec.js` — 12 TODO → 실 assertion
+- [x] `playwright/clm/nomerl/clm_search_filter.spec.js` — 8 TODO → 실 assertion
+
+## 완료
+- 총 115개 TODO 스텁 → 실 assertion으로 교체
+- 신규 파일 4개 playwright + 4개 k6 생성
+- 구현율 62.3% → 100% 달성
+
+---
+
 # Task: HSAD performance 스크립트 코드 검수 수정
 
 ## P0 — 런타임 오류

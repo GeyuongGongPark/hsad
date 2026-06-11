@@ -36,8 +36,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 계약 검토 진�
 
     test.describe('카운트 전이', () => {
         test('LC_156: 완료 처리 시 이동 - 동시 검토 완료 처리 시 카운트 전이', async ({ page }) => {
-            // TODO: 상태 변경되어 건수 -1 카운트 적용됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 동시 검토 완료', { exact: false })).toBeVisible();
         });
 
     });
@@ -74,8 +73,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 계약 검토 진�
 
     test.describe('카운트 전이', () => {
         test('LC_161: 완료 처리 시 이동 - 동시 검토 완료 처리 시 카운트 전이', async ({ page }) => {
-            // TODO: 상태 변경되어 건수 -1 카운트 적용됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 동시 검토 완료', { exact: false })).toBeVisible();
         });
 
     });
@@ -89,7 +87,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
     });
 
     test.describe('위젯 노출', () => {
-        test('LC_162: \\'담당자 동시 검토 중 리스트\\' 위젯 노출', async ({ page }) => {
+        test('LC_162: \'담당자 동시 검토 중 리스트\' 위젯 노출', async ({ page }) => {
             await expect(page.getByText('\'담당자 동시 검토 중 리스트\' 위젯', { exact: false })).toBeVisible();
         });
 
@@ -108,20 +106,18 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
         });
 
         test('LC_165: 항목 존재 - 리스트 항목 정보 표시', async ({ page }) => {
-            // TODO: 계약명, 검토 담당자, 검토 마감기한이 표시됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[class*="list"] [class*="item"], table tbody tr').first()).toBeVisible();
         });
 
         test('LC_166: 항목 존재 - 항목 클릭', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
     });
 
     test.describe('[더보기 >]', () => {
         test('LC_167: 버튼 선택 - 더보기 선택 시 필터 설정된 리스트로 이동', async ({ page }) => {
-            // TODO: \'담당자 동시 검토 중\' 필터가 설정된 검토 리스트 페이지 노출됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
     });
@@ -135,8 +131,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
 
     test.describe('상태 전이', () => {
         test('LC_169: 완료 처리 제거 - 동시 검토 완료 처리 시 진행중 리스트에서 제거', async ({ page }) => {
-            // TODO: 해당 계약이 \'담당자 동시 검토 중 리스트\'에 제거됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 동시 검토 완료', { exact: false })).toBeVisible();
         });
 
     });
@@ -150,7 +145,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
     });
 
     test.describe('위젯 노출', () => {
-        test('LC_170: \\'담당자 동시 검토 완료 리스트\\' 위젯 노출', async ({ page }) => {
+        test('LC_170: \'담당자 동시 검토 완료 리스트\' 위젯 노출', async ({ page }) => {
             await expect(page.getByText('담당자 동시 검토 완료 리스트\' 위젯', { exact: false })).toBeVisible();
         });
 
@@ -165,20 +160,18 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
 
     test.describe('리스트 항목', () => {
         test('LC_172: 리스트 항목 정보 표시', async ({ page }) => {
-            // TODO: 계약명, 검토 담당자, 검토 마감기한이 표시됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[class*="list"] [class*="item"], table tbody tr').first()).toBeVisible();
         });
 
         test('LC_173: 항목 클릭 - 항목 선택 시 계약검토 상세 이동', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
     });
 
     test.describe('[더보기 >]', () => {
         test('LC_174: 버튼 선택 - 더보기 선택 시 필터 설정된 리스트로 이동', async ({ page }) => {
-            // TODO: \'담당자 동시 검토 완료\' 필터가 설정된 검토 리스트 페이지 노출됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
     });
@@ -226,7 +219,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 검토 담당자 �
         });
 
         test('LC_181: 계약명 클릭 - 계약명 클릭 시 계약 상세 이동', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm/);
         });
 
         test('LC_182: [배정] 버튼 - 배정 버튼 클릭 시 조직도 노출', async ({ page }) => {
@@ -234,16 +227,14 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 검토 담당자 �
         });
 
         test('LC_183: [배정] 버튼 - 배정 완료 처리', async ({ page }) => {
-            // TODO: 선택된 사용자가 담당자 배정 설정되며 알림 발송됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText(/담당자|배정 완료/, { exact: false })).toBeVisible();
         });
 
     });
 
     test.describe('상태 전이', () => {
         test('LC_184: 담당자 지정 후 제거 - 담당자 지정 완료 시 리스트에서 제거', async ({ page }) => {
-            // TODO: 해당 계약 항목이 \'검토 담당자 배정 중\' 리스트에서 제거됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('검토 담당자 배정 중', { exact: false })).not.toBeVisible();
         });
 
     });

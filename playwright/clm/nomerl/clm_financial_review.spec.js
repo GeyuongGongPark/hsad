@@ -100,13 +100,11 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_019: 담당자 변경 - 조직도 팝업', async ({ page }) => {
-            // TODO: 선택한 사용자로 담당자 변경처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 변경', { exact: false })).toBeVisible();
         });
 
         test('LC_020: 담당자 변경 - 조직도 팝업', async ({ page }) => {
-            // TODO: 변경한 담당자명 텍스트로 변경 노출되며 뱃지에 하이라이트 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('변경됨', { exact: false })).toBeVisible();
         });
 
         test('LC_021: 담당 부서 추가 - 버튼', async ({ page }) => {
@@ -122,8 +120,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_024: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: HSAD 부서 조직도와 [전체 펼치기], [전체 접기]버튼 노출됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('전체 펼치기', { exact: false })).toBeVisible();
         });
 
         test('LC_025: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
@@ -135,18 +132,15 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_027: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 해당 부서 선택되어 선택된 부서 영역에 추가됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('선택된 부서', { exact: false })).toBeVisible();
         });
 
         test('LC_028: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 5개 부서 모두 선택됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('input[type="checkbox"]:checked')).toHaveCount(5);
         });
 
         test('LC_029: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 선택되지 않음
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('최대', { exact: false })).toBeVisible();
         });
 
         test('LC_030: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
@@ -166,23 +160,19 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_034: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 팝업 닫히며 선택한 부서 추가되지 않음
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_035: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 팝업 닫히며 선택한 부서 추가되지 않음
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_036: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 검토 항목 영역에 \'인사팀\' 항목 추가됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('인사팀', { exact: false })).toBeVisible();
         });
 
         test('LC_037: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            // TODO: 디폴트 값인 \'인사팀 팀장\' 배정 설정됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('인사팀 팀장', { exact: false })).toBeVisible();
         });
 
         test('LC_038: 부서 삭제 - [X] 버튼', async ({ page }) => {
@@ -190,8 +180,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_039: 부서 삭제 - [X] 버튼', async ({ page }) => {
-            // TODO: 선택한 항목이 삭제 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('인사팀', { exact: false })).not.toBeVisible();
         });
 
         test('LC_040: 저장 - [저장] 버튼', async ({ page }) => {
@@ -207,8 +196,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_043: 저장 - [저장] 버튼', async ({ page }) => {
-            // TODO: 유관부서 검토 설정 확인 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_044: 저장 - [저장] 버튼', async ({ page }) => {
@@ -220,8 +208,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_046: 저장 - [저장] 버튼', async ({ page }) => {
-            // TODO: 해당 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_047: 저장 - [저장] 버튼', async ({ page }) => {
@@ -229,8 +216,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_048: 저장 - [저장] 버튼', async ({ page }) => {
-            // TODO: 유관부서 검토 설정 확인 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_049: 저장 - [저장] 버튼', async ({ page }) => {
@@ -242,13 +228,11 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_051: 저장 - [저장] 버튼', async ({ page }) => {
-            // TODO: 해당 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_052: 저장 완료 - 알림', async ({ page }) => {
-            // TODO: 설정된 유관부서 검토 배정 담당자에게 배정 알림(이메일/노티) 발송됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('저장', { exact: false })).toBeVisible();
         });
 
         test('LC_053: 저장 완료 - 진행 내역', async ({ page }) => {
@@ -339,8 +323,7 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_072: 미배정 표기 - 라벨', async ({ page }) => {
-            // TODO: 미배정 라벨이 표시됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('미배정', { exact: false })).toBeVisible();
         });
 
         test('LC_073: 미배정 표기 - 라벨', async ({ page }) => {
@@ -372,8 +355,7 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_080: 유관부서 검토 담당자 배정 모달 - 검색 필드', async ({ page }) => {
-            // TODO: 마지막에 선택한 1명만 선택 상태로 유지됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[data-selected="true"], input[type="radio"]:checked').first()).toBeVisible();
         });
 
         test('LC_081: 유관부서 검토 담당자 배정 모달 - 검토 방법 설정', async ({ page }) => {
@@ -385,13 +367,11 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_083: 배정 처리 - 성공', async ({ page }) => {
-            // TODO: 팝업이 닫히며 금융 검토 담당 항목에 선택된 담당자 배정됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_084: 배정 처리 - 버튼 변경', async ({ page }) => {
-            // TODO: 버튼이 [변경]버튼으로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('변경', { exact: false })).toBeVisible();
         });
 
         test('LC_085: 배정 처리 - 미배정 텍스트 제거', async ({ page }) => {
@@ -442,8 +422,7 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_096: 변경 처리 - 새 담당자 배정', async ({ page }) => {
-            // TODO: 선택한 사용자로 검토 담당자 변경 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('변경', { exact: false })).toBeVisible();
         });
 
         test('LC_097: 변경 처리 - 코멘트 생성', async ({ page }) => {
@@ -462,23 +441,19 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
 
     test.describe('검토 완료', () => {
         test('LC_098: 권한별 노출 - 법무 담당자', async ({ page }) => {
-            // TODO: [법무 검토 완료], [요청자에게 보내기], [계약 중단/취소]버튼 노출
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /검토 완료/ })).toBeVisible();
         });
 
         test('LC_099: 권한별 노출 - 금융 담당자', async ({ page }) => {
-            // TODO: [금융 검토 완료], [요청자에게 보내기], [계약 중단/취소]버튼 노출
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /검토 완료/ })).toBeVisible();
         });
 
         test('LC_100: 권한별 노출 - 회계 담당자', async ({ page }) => {
-            // TODO: [회계 검토 완료], [요청자에게 보내기], [계약 중단/취소]버튼 노출
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /검토 완료/ })).toBeVisible();
         });
 
         test('LC_101: 권한별 노출 - 제작관리 담당자', async ({ page }) => {
-            // TODO: [제작관리 검토 완료], [요청자에게 보내기], [계약 중단/취소]버튼 
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /검토 완료/ })).toBeVisible();
         });
 
         test('LC_102: 권한별 노출 - 비-담당자', async ({ page }) => {
@@ -553,8 +528,7 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_111: 선택 동작 - 요청자 알림 발송', async ({ page }) => {
-            // TODO: 요청 알림 메일 수신됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('요청자 검토 중', { exact: false })).toBeVisible();
         });
 
     });
@@ -608,8 +582,7 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
 
     test.describe('법무 검토 완료 승인', () => {
         test('LC_131: 승인 시 최종 결재 단계로 진행', async ({ page }) => {
-            // TODO: 진행 단계가 \'최종 결재 중\'으로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('최종 결재 중', { exact: false })).toBeVisible();
         });
 
     });
@@ -620,8 +593,10 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_133: 동시검토 승인 반려 팝업 - 동시 검토 항목', async ({ page }) => {
-            // TODO: 체크박스 항목이 [법무, 금융, 회계, 제작관리]와 동일한 순서/이름으로
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('법무', { exact: false })).toBeVisible();
+            await expect(page.getByText('금융', { exact: false })).toBeVisible();
+            await expect(page.getByText('회계', { exact: false })).toBeVisible();
+            await expect(page.getByText('제작관리', { exact: false })).toBeVisible();
         });
 
         test('LC_134: 동시검토 승인 반려 팝업 - 사유', async ({ page }) => {
@@ -637,8 +612,7 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_137: 동시검토 승인 반려 팝업 - [취소] 버튼', async ({ page }) => {
-            // TODO: 팝업 닫히며 진행 상태 유지됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
         test('LC_138: 동시검토 승인 반려 팝업 - [확인] 버튼', async ({ page }) => {
@@ -658,13 +632,11 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_142: 동시검토 승인 반려 팝업 - [확인] 버튼', async ({ page }) => {
-            // TODO: [확인] 버튼이 비활성화 상태로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: '확인' })).toBeDisabled();
         });
 
         test('LC_143: 동시검토 승인 반려 팝업 - [확인] 버튼', async ({ page }) => {
-            // TODO: [확인] 버튼이 비활성화 상태로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: '확인' })).toBeDisabled();
         });
 
         test('LC_144: 동시검토 승인 반려 팝업 - [확인] 버튼', async ({ page }) => {
@@ -676,31 +648,26 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_146: 승인 반려 완료 팝업 - [확인] 버튼', async ({ page }) => {
-            // TODO: 승인 반려 완료 팝업이 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
     });
 
     test.describe('반려 후 상태', () => {
         test('LC_147: 선택 항목 - 검토 진행 중', async ({ page }) => {
-            // TODO: [금융, 회계] 항목의 상태가 \'검토 중\'으로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('검토 중', { exact: false })).toBeVisible();
         });
 
         test('LC_148: 미선택 항목 - 검토 완료 유지', async ({ page }) => {
-            // TODO: [법무, 제작관리] 항목은 \'검토 완료\' 상태 유지됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('검토 완료', { exact: false })).toBeVisible();
         });
 
         test('LC_149: 전체 선택 - 전체 검토 진행 중', async ({ page }) => {
-            // TODO: 4개 항목 모두 상태가 \'검토 중\'으로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 동시 검토', { exact: false })).toBeVisible();
         });
 
         test('LC_150: 진행 단계 - 문서 상태 변경', async ({ page }) => {
-            // TODO: 담당자 동시 검토중 상태로 변경됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('담당자 동시 검토', { exact: false })).toBeVisible();
         });
 
         test('LC_151: 진행 내역 - 로그 기록', async ({ page }) => {

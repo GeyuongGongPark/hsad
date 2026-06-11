@@ -492,6 +492,33 @@ JS props(`width={600}`)로 고정 픽셀을 전달하면 반응형 통일이 어
 
 ---
 
+### HSAD TC 미구현 분석 — TODO 스텁 교체 패턴
+
+**TODO 스텁 패턴 정의**:
+```js
+// TODO: 상태 변경됨
+await expect(page).toHaveURL(/.+/);
+```
+이 패턴은 TC 번호가 파일에 존재하지만 실제 assertion이 없는 것. coverage 통계상 100%로 집계되지만 실제 검증 없음.
+
+**교체 전략 (TC 설명 → assertion 유형)**:
+| 설명 패턴 | 교체 assertion |
+|-----------|---------------|
+| "팝업이 닫힌다" | `locator('[role="dialog"]').not.toBeVisible()` |
+| "팝업이 노출된다" | `locator('[role="dialog"]').toBeVisible()` |
+| "버튼이 활성화됨" | `getByRole('button', { name: /.../ }).toBeEnabled()` |
+| "버튼이 비활성화됨" | `getByRole('button', { name: /.../ }).toBeDisabled()` |
+| "상태명 노출" | `getByText('상태명', { exact: false }).toBeVisible()` |
+| "페이지 이동" | `toHaveURL(/url패턴/)` |
+| "리스트에서 제거됨" | `getByText('항목명').not.toBeVisible()` |
+| "N건 등록됨" | `locator('항목 셀렉터').toHaveCount(N)` |
+| "테이블 데이터 표시" | `locator('table tbody tr').not.toHaveCount(0)` |
+
+**미구현 주요 원인**:
+- 상태 전이(완료 처리 후 변경 확인) → 사전 데이터 + 액션 조합 필요
+- 다중 계정(검토자 A → 요청자 B 확인) → 싱글 세션으로 커버 불가
+- 외부 연동(이메일 수신 확인) → 애플리케이션 경계 밖
+
 ### box-shadow 일괄 제거 시 transition 참조도 함께 정리
 
 `box-shadow:` 속성을 제거해도 `transition: border-color 0.15s, box-shadow 0.15s;`처럼 transition에 섞인 참조가 남는다.

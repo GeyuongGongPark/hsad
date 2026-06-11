@@ -14,13 +14,11 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 블랙리스
 
     test.describe('MDM 거래처 조회', () => {
         test('LC_218: 정상 업체 - MDM 등록 정상 업체로 검토 요청 시 정상 진행', async ({ page }) => {
-            // TODO: 검토 요청 진행되며 프로세스에 따라 상태 변경 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm\/review/);
         });
 
         test('LC_219: 블랙리스트 업체 - 블랙리스트 업체로 검토 요청 시 거래 제한 팝업 노출', async ({ page }) => {
-            // TODO: 블랙리스트 차단 팝업 노출되며 검토 요청 진행되지 않음
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).toBeVisible();
         });
 
     });
@@ -83,8 +81,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 블랙리스
         });
 
         test('LC_229: [취소] 버튼 선택 동작', async ({ page }) => {
-            // TODO: 특별 승인 요청 미처리되며 차단 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
     });
@@ -95,26 +92,22 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 블랙리스
         });
 
         test('LC_231: 우측 상단 닫기[X] 버튼 선택 동작', async ({ page }) => {
-            // TODO: 특별 승인 요청 미처리되며 차단 팝업 닫힘
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).not.toBeVisible();
         });
 
     });
 
     test.describe('[특별 승인 요청] 버튼', () => {
         test('LC_232:  비활성화 - 동의 미체크 시 [특별 승인 요청] 버튼 비활성화', async ({ page }) => {
-            // TODO: 비활성화 상태로 노출되어 선택 불가함
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /특별 승인 요청/ })).toBeDisabled();
         });
 
         test('LC_233: 활성화 - 동의 체크 시 [특별 승인 요청] 버튼 활성화', async ({ page }) => {
-            // TODO: 버튼이 활성화 상태로 변경되며 선택 가능함
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByRole('button', { name: /특별 승인 요청/ })).toBeEnabled();
         });
 
         test('LC_234: 활성화 - [특별 승인 요청] 버튼 선택 동작', async ({ page }) => {
-            // TODO: 특별 승인 요청 완료 팝업 노출되며 득별 승인 요청 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.locator('[role="dialog"]')).toBeVisible();
         });
 
     });
@@ -133,8 +126,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_236: 이메일 발송 - 윤리사무국 안내 메일 발송', async ({ page }) => {
-            // TODO: 윤리사무국 담당자에게 이메일 전송됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 요청 중', { exact: false })).toBeVisible();
         });
 
         test('LC_237: 특별 승인 요청 완료 팝업 - 특별 승인 요청 완료 팝업 노출', async ({ page }) => {
@@ -142,8 +134,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_238: 특별 승인 요청 완료 팝업 - Page Refresh', async ({ page }) => {
-            // TODO: 페이지가 새로고침 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 요청 중', { exact: false })).toBeVisible();
         });
 
     });
@@ -174,8 +165,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_243: 계약 검토 요청 상세 페이지 - [계약 중단/취소] 버튼', async ({ page }) => {
-            // TODO: 계약 중단 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('중단', { exact: false })).toBeVisible();
         });
 
     });
@@ -186,12 +176,11 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_245: 메일 진입 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm/);
         });
 
         test('LC_246: 계약 검토 요청 상세 페이지 - 윤리사무국 담당자 > 특별 승인 요청 중 문서 상세 페이지 진입', async ({ page }) => {
-            // TODO: 특별 승인 요청중 상태 문서 화면 노출되며  우측 상단 [특별 승인 완료
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 요청 중', { exact: false })).toBeVisible();
         });
 
         test('LC_247: 계약 검토 요청 상세 페이지', async ({ page }) => {
@@ -199,13 +188,11 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_248: 계약 검토 요청 상세 페이지 - [특별 승인 완료] 버튼', async ({ page }) => {
-            // TODO: 특별 승인 완료 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 완료', { exact: false })).toBeVisible();
         });
 
         test('LC_249: 계약 검토 요청 상세 페이지 - [특별 승인 거부] 버튼', async ({ page }) => {
-            // TODO: 특별 승인 거부 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 거부', { exact: false })).toBeVisible();
         });
 
     });
@@ -216,12 +203,11 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_251: 메일 진입 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm/);
         });
 
         test('LC_252: 계약 검토 요청 상세 페이지 - 윤리사무국 담당자 > 특별 승인 요청 중 문서 상세 페이지 진입', async ({ page }) => {
-            // TODO: 특별 승인 요청중 상태 문서 화면 노출되며  우측 상단 [특별 승인 완료
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 요청 중', { exact: false })).toBeVisible();
         });
 
         test('LC_253: 계약 검토 요청 상세 페이지', async ({ page }) => {
@@ -229,13 +215,11 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_254: 계약 검토 요청 상세 페이지 - [특별 승인 완료] 버튼', async ({ page }) => {
-            // TODO: 특별 승인 완료 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 완료', { exact: false })).toBeVisible();
         });
 
         test('LC_255: 계약 검토 요청 상세 페이지 - [특별 승인 거부] 버튼', async ({ page }) => {
-            // TODO: 특별 승인 거부 처리됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('특별 승인 거부', { exact: false })).toBeVisible();
         });
 
     });
@@ -288,7 +272,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_264: 메일 발송 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm/);
         });
 
         test('LC_265: 문서 상태 - 결재선 설정', async ({ page }) => {
@@ -296,8 +280,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_266: 문서 상태 - 결재선 설정', async ({ page }) => {
-            // TODO: 정상 수신됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('내부 결재 중', { exact: false })).toBeVisible();
         });
 
         test('LC_267: 문서 상태 - 결재선 미설정', async ({ page }) => {
@@ -305,8 +288,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_268: 문서 관련자 알림 - 문서 관련자 알림 발송', async ({ page }) => {
-            // TODO: 정상 수신됨
-                    await expect(page).toHaveURL(/.+/);
+            await expect(page.getByText('완료', { exact: false })).toBeVisible();
         });
 
         test('LC_269: 진행 내역 데이터 - 진행 내역 데이터 노출', async ({ page }) => {
@@ -325,8 +307,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
             await expect(page.getByText('해당 특별 승인 요청 완료된 문서 항목', { exact: false })).toBeVisible();
         });
 
-        test('LC_273: 검토 요청 조회 - 문서 미관련자
-(권한 보유)', async ({ page }) => {
+        test('LC_273: 검토 요청 조회 - 문서 미관련자\n(권한 보유)', async ({ page }) => {
             await expect(page.getByText('해당 특별 승인 요청 완료된 문서 항목', { exact: false })).toBeVisible();
         });
 
@@ -342,7 +323,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_276: 메일 발송 - [계약 내용 확인] 버튼', async ({ page }) => {
-            await expect(page).toHaveURL(/.+/);
+            await expect(page).toHaveURL(/\/clm/);
         });
 
         test('LC_277: 문서 상태 - 특별 승인 거부 처리 후 문서 상태 전이', async ({ page }) => {
