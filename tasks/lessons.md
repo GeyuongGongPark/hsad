@@ -560,3 +560,42 @@ await expect(page).toHaveURL(/.+/);
 - 이메일 링크 → 계약 검토 상세 이동: `/\/clm\/review/` 로 구체화
 - 계약명 클릭 → 상세 이동: `/\/clm\/[^/]+/` (하위 경로 있어야 함)로 구체화
 
+---
+
+### Playwright - Windows Babel strict parser 호환성
+
+**현상**: macOS/Linux에서 정상 실행되던 .spec.js 파일이 Windows cmd에서 `Unterminated string constant` 오류로 실행 안 됨
+
+**원인**: Playwright 내부 Babel strict parser는 다음을 거부함:
+1. `\'` in single-quoted strings: `'담당자 \'중 리스트\''` → Babel은 `\\`를 escaped backslash로, `'`를 string terminator로 파싱
+2. `\n` in test() names: 실제 줄바꿈으로 처리 → unterminated string
+
+**Node.js vs Babel 차이**: `node --check`는 통과하지만 Playwright Babel parser는 거부. 두 파서가 `\'` 처리 방식이 다름.
+
+**수정 방법**:
+1. `\'` 포함 문자열: 바깥 따옴표를 `"..."` 더블 쿼트로 교체, 안쪽 `\'` → `'` (이스케이프 제거)
+2. `\n` in test names: 공백 한 칸으로 교체
+
+**Python 일괄 변환**:
+```python
+def replacer(m):
+    s = m.group(0)
+    if "\\'" in s:
+        inner = s[1:-1].replace("\\'", "'")
+        return '"' + inner + '"'
+    return s
+pattern = r"'(?:[^'\n\\]|\\.)*'"
+new_content = re.sub(pattern, replacer, content)
+```
+
+**전수 검사 명령**:
+```bash
+grep -rn "\\\\'" playwright/**/*.spec.js  # \' 잔여 확인
+grep -rn "\\\\n" playwright/**/*.spec.js  # \n in test names 확인
+```
+
+**교훈**:
+- JS에서 `\'`는 technically valid이나 Playwright Babel strict parser에서는 오류
+- 작성 시점부터 `'It\'s here'` 대신 `"It's here"` 패턴 사용 권장
+- Windows 환경 실행 테스트가 없으면 이 오류가 배포 직전까지 발견 안 됨
+

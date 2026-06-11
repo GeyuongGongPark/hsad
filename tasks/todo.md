@@ -421,3 +421,37 @@ console.log(`... ${duration}ms`);
 - `clm_groupware.spec.js` beforeEach: 로그인 후 그룹웨어 연동 페이지 진입 로직 구현 필요
 - `blacklist.spec.js`: 이메일 링크 클릭 시뮬레이션 TC 사전 조건 불명확
 - 일부 spec에서 `page.waitForTimeout` 사용 여전히 남아있을 수 있음
+
+---
+
+# Task: HSAD k6 wait() 제거 동기화
+
+## 배경
+Playwright wait 제거 패턴을 k6 performance 파일에 동기화.
+
+## 완료
+- [x] `performance/clm/nomerl/clm_process.js`: `wait(3000)` × 2 → `locator(CLM.FOOTER_CONFIRM_BUTTON).waitFor({ state: 'hidden' })`, `wait` 함수 정의 제거
+- [x] `performance/clm/nomerl/clm_financial.js`: 동일 패턴
+- [x] `performance/clm/nomerl/clm_lagel.js`: 동일 패턴
+- [x] `performance/clm/nomerl/clm_final.js`: 동일 패턴
+- [x] `performance/clm/nomerl/clm_esign.js`: 동일 패턴
+- [x] `performance/clm/nomerl/clm_seal.js`: 동일 패턴
+- [x] `performance/advice/advice_draft.js`: `wait(10000)` 제거 (불필요), `wait` 함수 정의 제거
+- [x] `performance/blacklist/blacklist.js`: `wait(5000)` × 2 → `waitForLoadState('networkidle')`
+
+---
+
+# Task: HSAD Windows Playwright Babel 구문 오류 수정
+
+## 배경
+Windows cmd에서 Playwright 실행 시 Babel strict parser 오류:
+- `blacklist.spec.js:327 Unterminated string constant` (테스트명 내 `\n`)
+- `dashboard_onprem.spec.js:92 Unterminated string constant` (`\'` in single-quoted strings)
+
+## 완료
+- [x] `playwright/blacklist/blacklist.spec.js`: 테스트명 내 `\n` → 공백, `\'` 포함 문자열 → 더블 쿼트
+- [x] `playwright/dashboard/dashboard_onprem.spec.js`: `\'` 포함 단일 인용 문자열 18곳 → 더블 쿼트
+- [x] `playwright/clm/nomerl/clm_financial_review.spec.js`: `\'` 포함 단일 인용 문자열 7곳 → 더블 쿼트
+- [x] `playwright/clm/nomerl/clm_groupware.spec.js`: `\'` 포함 단일 인용 문자열 6곳 → 더블 쿼트
+- [x] `playwright/clm/nomerl/clm_seal_approval.spec.js`: `\'` 포함 단일 인용 문자열 18곳 → 더블 쿼트
+- [x] 전체 스캔 완료: 나머지 파일 문제 없음 확인
