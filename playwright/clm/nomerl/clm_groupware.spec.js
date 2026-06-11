@@ -14,7 +14,7 @@ test.describe('그룹웨어(전자결재) / MDM 거래처 연동 - 계약서 검
 
     test.describe('첨부/별첨', () => {
         test('LC_349: 버튼 - 파일 업로드', async ({ page }) => {
-            await expect(page.getByText('파일 업로드\' 버튼', { exact: false })).toBeVisible();
+            await expect(page.getByText("파일 업로드' 버튼", { exact: false })).toBeVisible();
         });
 
         test('LC_350: 버튼 - 전자결재 문서 연결', async ({ page }) => {
@@ -63,7 +63,7 @@ test.describe('그룹웨어(전자결재) / MDM 거래처 연동 - 계약서 검
         });
 
         test('LC_360: 입력 필드 - 수기 등록 버튼', async ({ page }) => {
-            await expect(page.getByText('수기 등록\' 버튼이 조회 버튼 옆에', { exact: false })).toBeVisible();
+            await expect(page.getByText("수기 등록' 버튼이 조회 버튼 옆에", { exact: false })).toBeVisible();
         });
 
         test('LC_361: 조회 동작 - MDM Like 검색', async ({ page }) => {
@@ -109,7 +109,7 @@ test.describe('그룹웨어(전자결재) / MDM 거래처 연동 - 계약서 검
 
     test.describe('수기 등록', () => {
         test('LC_370: 팝업(2-3) 노출 - 트리거', async ({ page }) => {
-            await expect(page.getByText('거래처 수기 등록\' 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("거래처 수기 등록' 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_371: 법인 탭 - 입력 필드', async ({ page }) => {
@@ -156,11 +156,11 @@ test.describe('그룹웨어(전자결재) / MDM 거래처 연동 - 검토 요청
 
     test.describe('계약 체결 품의 예외', () => {
         test('LC_379: 버튼 - 노출', async ({ page }) => {
-            await expect(page.getByText('계약 체결 품의 예외\' 버튼', { exact: false })).toBeVisible();
+            await expect(page.getByText("계약 체결 품의 예외' 버튼", { exact: false })).toBeVisible();
         });
 
         test('LC_380: 팝업(3-1) - 노출', async ({ page }) => {
-            await expect(page.getByText('계약 체결 품의 예외 등록\' 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("계약 체결 품의 예외 등록' 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_381: 팝업(3-1) - 문서 리스트', async ({ page }) => {
@@ -177,7 +177,7 @@ test.describe('그룹웨어(전자결재) / MDM 거래처 연동 - 검토 요청
         });
 
         test('LC_384: 팝업(3-2) - 노출', async ({ page }) => {
-            await expect(page.getByText('계약 체결 품의 예외 안내\'(3-2) 확인 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("계약 체결 품의 예외 안내'(3-2) 확인 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_385: 팝업(3-2) - 본문', async ({ page }) => {

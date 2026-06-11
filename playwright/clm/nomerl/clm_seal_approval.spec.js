@@ -38,15 +38,15 @@ test.describe('인감별 결재선 지정 (온프레미스) - 로고/도장 관�
         });
 
         test('LC_284: 카드 정보 - 결재 경로', async ({ page }) => {
-            await expect(page.getByText('\'현업부서 → 현업부서팀장 → 금융팀장\'  순서', { exact: false })).toBeVisible();
+            await expect(page.getByText("'현업부서 → 현업부서팀장 → 금융팀장'  순서", { exact: false })).toBeVisible();
         });
 
         test('LC_285: 카드 정보 - 결재 경로', async ({ page }) => {
-            await expect(page.getByText('\'현업부서 → 현업부서팀장 → 업무지원팀장\'  순서', { exact: false })).toBeVisible();
+            await expect(page.getByText("'현업부서 → 현업부서팀장 → 업무지원팀장'  순서", { exact: false })).toBeVisible();
         });
 
         test('LC_286: 카드 정보 - [더보기] 아이콘', async ({ page }) => {
-            await expect(page.getByText('수정하기\'와 \'삭제하기\' 메뉴', { exact: false })).toBeVisible();
+            await expect(page.getByText("수정하기'와 '삭제하기' 메뉴", { exact: false })).toBeVisible();
         });
 
         test('LC_287: 카드 정보 - [더보기] 아이콘', async ({ page }) => {
@@ -54,7 +54,7 @@ test.describe('인감별 결재선 지정 (온프레미스) - 로고/도장 관�
         });
 
         test('LC_288: 카드 정보 - [더보기] 아이콘', async ({ page }) => {
-            await expect(page.getByText('기업 직인 삭제 안내\' 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("기업 직인 삭제 안내' 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_289: [기업 직인 등록+] 버튼 - 노출', async ({ page }) => {
@@ -65,11 +65,11 @@ test.describe('인감별 결재선 지정 (온프레미스) - 로고/도장 관�
 
     test.describe('기업직인 등록', () => {
         test('LC_290: 기업직인 등록 팝업 - [기업 직인 등록+] 버튼 선택 동작', async ({ page }) => {
-            await expect(page.getByText('기업 직인 등록\' 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("기업 직인 등록' 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_291: 기업직인 등록 팝업 - 직인명 입력', async ({ page }) => {
-            await expect(page.getByText('직인 명을 입력해주세요.\' placeholder', { exact: false })).toBeVisible();
+            await expect(page.getByText("직인 명을 입력해주세요.' placeholder", { exact: false })).toBeVisible();
         });
 
         test('LC_292: 기업직인 등록 팝업 - [불러오기] 버튼', async ({ page }) => {
@@ -85,7 +85,7 @@ test.describe('인감별 결재선 지정 (온프레미스) - 로고/도장 관�
         });
 
         test('LC_295: 기업직인 등록 팝업 - 직인용도 입력', async ({ page }) => {
-            await expect(page.getByText('직인 용도를 입력해주세요.\'placeholder', { exact: false })).toBeVisible();
+            await expect(page.getByText("직인 용도를 입력해주세요.'placeholder", { exact: false })).toBeVisible();
         });
 
         test('LC_296: 기업직인 등록 팝업 - 결재선 안내 문구', async ({ page }) => {
@@ -157,7 +157,7 @@ test.describe('인감별 결재선 지정 (온프레미스) - 인감 사용 신�
         });
 
         test('LC_309: 문서 첨부 방식 - 기본값', async ({ page }) => {
-            await expect(page.getByText('파일로 첨부하기\' 옵션 기본 선택 상태로', { exact: false })).toBeVisible();
+            await expect(page.getByText("파일로 첨부하기' 옵션 기본 선택 상태로", { exact: false })).toBeVisible();
         });
 
         test('LC_310: 문서 - 파일 업로드 버튼', async ({ page }) => {
@@ -266,11 +266,11 @@ test.describe('인감별 결재선 지정 (온프레미스) - 계약검토 상�
         });
 
         test('LC_330: 승인 여부 - 상태', async ({ page }) => {
-            await expect(page.getByText('진행 상태가 \'인감사용 신청 중\'으로', { exact: false })).toBeVisible();
+            await expect(page.getByText("진행 상태가 '인감사용 신청 중'으로", { exact: false })).toBeVisible();
         });
 
         test('LC_331: 승인 여부 - 상태', async ({ page }) => {
-            await expect(page.getByText('진행 상태가 \'인감 사용 반려\'로', { exact: false })).toBeVisible();
+            await expect(page.getByText("진행 상태가 '인감 사용 반려'로", { exact: false })).toBeVisible();
         });
 
     });
@@ -292,19 +292,19 @@ test.describe('인감별 결재선 지정 (온프레미스) - 인감 사용 관�
         });
 
         test('LC_334: 컬럼 - 상태', async ({ page }) => {
-            await expect(page.getByText('대기\' 상태 텍스트', { exact: false })).toBeVisible();
+            await expect(page.getByText("대기' 상태 텍스트", { exact: false })).toBeVisible();
         });
 
         test('LC_335: 컬럼 - 상태', async ({ page }) => {
-            await expect(page.getByText('버튼 미노출 \'승인\' 텍스트', { exact: false })).toBeVisible();
+            await expect(page.getByText("버튼 미노출 '승인' 텍스트", { exact: false })).toBeVisible();
         });
 
         test('LC_336: 컬럼 - 상태', async ({ page }) => {
-            await expect(page.getByText('버튼 미노출 \'반려\' 텍스트', { exact: false })).toBeVisible();
+            await expect(page.getByText("버튼 미노출 '반려' 텍스트", { exact: false })).toBeVisible();
         });
 
         test('LC_337: [승인] 버튼 - 확인 팝업', async ({ page }) => {
-            await expect(page.getByText('인감 사용을 승인하시겠습니까?\' 확인 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("인감 사용을 승인하시겠습니까?' 확인 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_338: [승인] 버튼 - 확인 팝업', async ({ page }) => {
@@ -313,7 +313,7 @@ test.describe('인감별 결재선 지정 (온프레미스) - 인감 사용 관�
         });
 
         test('LC_339: [반려] 버튼 - 확인 팝업', async ({ page }) => {
-            await expect(page.getByText('인감 사용을 반려하시겠습니까?\' 확인 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("인감 사용을 반려하시겠습니까?' 확인 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_340: [반려] 버튼 - 확인 팝업', async ({ page }) => {
@@ -337,14 +337,14 @@ test.describe('인감별 결재선 지정 (온프레미스) - 인감 사용 관�
         });
 
         test('LC_344: 날인 반납 - 결재라인 미포함', async ({ page }) => {
-            await expect(page.getByText('버튼 미노출되며 \'-\' 표시', { exact: false })).toBeVisible();
+            await expect(page.getByText("버튼 미노출되며 '-' 표시", { exact: false })).toBeVisible();
         });
 
     });
 
     test.describe('날인 완료', () => {
         test('LC_345: 날인 완료 확인 팝업 - 날인 완료 버튼 클릭 → 확인 팝업 노출', async ({ page }) => {
-            await expect(page.getByText('인감 날인이 완료되었습니까?\' 확인 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("인감 날인이 완료되었습니까?' 확인 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_346: 날인 완료 확인 팝업 - 확인 처리', async ({ page }) => {
@@ -355,7 +355,7 @@ test.describe('인감별 결재선 지정 (온프레미스) - 인감 사용 관�
 
     test.describe('반납 완료', () => {
         test('LC_347: 반납 왼료 확인 팝업 - 반납 완료 버튼 클릭 → 확인 팝업 노출', async ({ page }) => {
-            await expect(page.getByText('인감이 반납 완료되었습니까?\' 확인 팝업', { exact: false })).toBeVisible();
+            await expect(page.getByText("인감이 반납 완료되었습니까?' 확인 팝업", { exact: false })).toBeVisible();
         });
 
         test('LC_348: 반납 왼료 확인 팝업 - 확인 처리', async ({ page }) => {

@@ -80,15 +80,15 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_014: 디폴트 담당자 - 금융', async ({ page }) => {
-            await expect(page.getByText('하단에 \'금융 팀장\' 텍스트와 \'변경됨\' 뱃지', { exact: false })).toBeVisible();
+            await expect(page.getByText("하단에 '금융 팀장' 텍스트와 '변경됨' 뱃지", { exact: false })).toBeVisible();
         });
 
         test('LC_015: 디폴트 담당자 - 회계', async ({ page }) => {
-            await expect(page.getByText('하단에 \'회계 팀장\' 텍스트와 \'변경됨\' 뱃지', { exact: false })).toBeVisible();
+            await expect(page.getByText("하단에 '회계 팀장' 텍스트와 '변경됨' 뱃지", { exact: false })).toBeVisible();
         });
 
         test('LC_016: 디폴트 담당자 - 제작관리', async ({ page }) => {
-            await expect(page.getByText('하단에 \'제작관리 팀장\' 텍스트와 \'변경됨\' 뱃지', { exact: false })).toBeVisible();
+            await expect(page.getByText("하단에 '제작관리 팀장' 텍스트와 '변경됨' 뱃지", { exact: false })).toBeVisible();
         });
 
         test('LC_017: 담당자 변경 - 버튼', async ({ page }) => {
@@ -144,7 +144,7 @@ test.describe('재무검토 프로세스 추가 - 유관부서설정', () => {
         });
 
         test('LC_030: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
-            await expect(page.getByText('\'선택된 부서가 없습니다.\' 안내 문구', { exact: false })).toBeVisible();
+            await expect(page.getByText("'선택된 부서가 없습니다.' 안내 문구", { exact: false })).toBeVisible();
         });
 
         test('LC_031: 담당 부서 추가 - 조직도 팝업', async ({ page }) => {
@@ -343,7 +343,7 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_077: 유관부서 검토 담당자 배정 모달 - 검색 필드', async ({ page }) => {
-            await expect(page.getByText('\'담당자명으로 검색\' Placeholder', { exact: false })).toBeVisible();
+            await expect(page.getByText("'담당자명으로 검색' Placeholder", { exact: false })).toBeVisible();
         });
 
         test('LC_078: 유관부서 검토 담당자 배정 모달 - 검색 필드', async ({ page }) => {
@@ -359,7 +359,7 @@ test.describe('재무검토 프로세스 추가 - 추가검토 담당자 배정'
         });
 
         test('LC_081: 유관부서 검토 담당자 배정 모달 - 검토 방법 설정', async ({ page }) => {
-            await expect(page.getByText('\'동시 검토\' 단일 옵션으로 선택된 상태로', { exact: false })).toBeVisible();
+            await expect(page.getByText("'동시 검토' 단일 옵션으로 선택된 상태로", { exact: false })).toBeVisible();
         });
 
         test('LC_082: 유관부서 검토 담당자 배정 모달 - 배정 버튼 노출', async ({ page }) => {
@@ -604,7 +604,7 @@ test.describe('재무검토 프로세스 추가 - 담당자 검토', () => {
         });
 
         test('LC_135: 동시검토 승인 반려 팝업 - 사유', async ({ page }) => {
-            await expect(page.getByText('\'반려 사유를 입력해주세요.\' Placeholder', { exact: false })).toBeVisible();
+            await expect(page.getByText("'반려 사유를 입력해주세요.' Placeholder", { exact: false })).toBeVisible();
         });
 
         test('LC_136: 동시검토 승인 반려 팝업 - [취소] 버튼', async ({ page }) => {

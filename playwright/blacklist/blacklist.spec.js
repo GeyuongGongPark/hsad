@@ -157,7 +157,7 @@ test.describe('블랙리스트 업체 계약 특별 승인 요청 - 특별 승�
         });
 
         test('LC_241: 계약 검토 요청 상세 페이지 - 진행 내역', async ({ page }) => {
-            await expect(page.getByText('특별 승인 요청중\'으로 문서 상태 변경 내역', { exact: false })).toBeVisible();
+            await expect(page.getByText("특별 승인 요청중'으로 문서 상태 변경 내역", { exact: false })).toBeVisible();
         });
 
         test('LC_242: 계약 검토 요청 상세 페이지 - [계약 중단/취소] 버튼', async ({ page }) => {

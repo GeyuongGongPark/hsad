@@ -14,11 +14,11 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 계약 검토 진�
 
     test.describe('상태 항목 추가 노출', () => {
         test('LC_152: 담당자 동시 검토 중 - 담당자 동시 검토 중 항목 추가 노출', async ({ page }) => {
-            await expect(page.getByText('\'담당자 동시 검토중\' 상태 항목', { exact: false })).toBeVisible();
+            await expect(page.getByText("'담당자 동시 검토중' 상태 항목", { exact: false })).toBeVisible();
         });
 
         test('LC_153: 담당자 동시 검토 완료 - 담당자 동시 검토 완료 항목 추가 노출', async ({ page }) => {
-            await expect(page.getByText('\'담당자 동시 검토 완료\' 상태 항목', { exact: false })).toBeVisible();
+            await expect(page.getByText("'담당자 동시 검토 완료' 상태 항목", { exact: false })).toBeVisible();
         });
 
     });
@@ -51,11 +51,11 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 계약 검토 진�
 
     test.describe('상태 항목 추가 노출', () => {
         test('LC_157: 담당자 동시 검토 중 - 담당자 동시 검토 중 항목 추가 노출', async ({ page }) => {
-            await expect(page.getByText('\'담당자 동시 검토중\' 상태 항목', { exact: false })).toBeVisible();
+            await expect(page.getByText("'담당자 동시 검토중' 상태 항목", { exact: false })).toBeVisible();
         });
 
         test('LC_158: 담당자 동시 검토 완료 - 담당자 동시 검토 완료 항목 추가 노출', async ({ page }) => {
-            await expect(page.getByText('\'담당자 동시 검토 완료\' 상태 항목', { exact: false })).toBeVisible();
+            await expect(page.getByText("'담당자 동시 검토 완료' 상태 항목", { exact: false })).toBeVisible();
         });
 
     });
@@ -87,15 +87,15 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
     });
 
     test.describe('위젯 노출', () => {
-        test('LC_162: \'담당자 동시 검토 중 리스트\' 위젯 노출', async ({ page }) => {
-            await expect(page.getByText('\'담당자 동시 검토 중 리스트\' 위젯', { exact: false })).toBeVisible();
+        test("LC_162: '담당자 동시 검토 중 리스트' 위젯 노출", async ({ page }) => {
+            await expect(page.getByText("'담당자 동시 검토 중 리스트' 위젯", { exact: false })).toBeVisible();
         });
 
     });
 
     test.describe('타이틀', () => {
         test('LC_163: 배정 팀 이름 - 타이틀 > 배정 팀 이름 표시', async ({ page }) => {
-            await expect(page.getByText('사용자의 배정 팀 이름(\'금융팀\')', { exact: false })).toBeVisible();
+            await expect(page.getByText("사용자의 배정 팀 이름('금융팀')", { exact: false })).toBeVisible();
         });
 
     });
@@ -145,15 +145,15 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
     });
 
     test.describe('위젯 노출', () => {
-        test('LC_170: \'담당자 동시 검토 완료 리스트\' 위젯 노출', async ({ page }) => {
-            await expect(page.getByText('담당자 동시 검토 완료 리스트\' 위젯', { exact: false })).toBeVisible();
+        test("LC_170: '담당자 동시 검토 완료 리스트' 위젯 노출", async ({ page }) => {
+            await expect(page.getByText("담당자 동시 검토 완료 리스트' 위젯", { exact: false })).toBeVisible();
         });
 
     });
 
     test.describe('타이틀', () => {
         test('LC_171: 배정 팀 이름 - 타이틀 > 배정 팀 이름 표시', async ({ page }) => {
-            await expect(page.getByText('사용자의 배정 팀 이름(\'금융팀\')', { exact: false })).toBeVisible();
+            await expect(page.getByText("사용자의 배정 팀 이름('금융팀')", { exact: false })).toBeVisible();
         });
 
     });
@@ -178,7 +178,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 담당자 동시 �
 
     test.describe('상태 전이', () => {
         test('LC_175: 완료 처리 추가 - 동시 검토 완료 처리 시 완료 리스트에 추가', async ({ page }) => {
-            await expect(page.getByText('해당 계약이 \'담당자 동시 검토 완료 리스트\' 상단', { exact: false })).toBeVisible();
+            await expect(page.getByText("해당 계약이 '담당자 동시 검토 완료 리스트' 상단", { exact: false })).toBeVisible();
         });
 
     });
@@ -193,22 +193,22 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 검토 담당자 �
 
     test.describe('권한 노출', () => {
         test('LC_176: 배정 권한 보유자 - 배정 권한 보유자에게 위젯 노출', async ({ page }) => {
-            await expect(page.getByText('검토 담당자 배정 중\' 위젯', { exact: false })).toBeVisible();
+            await expect(page.getByText("검토 담당자 배정 중' 위젯", { exact: false })).toBeVisible();
         });
 
         test('LC_177: 배정 권한 보유자 - 배정 권한 보유자 배정항목 미존재 시 미노출', async ({ page }) => {
-            await expect(page.getByText('검토 담당자 배정 중\' 위젯 미', { exact: false })).toBeVisible();
+            await expect(page.getByText("검토 담당자 배정 중' 위젯 미", { exact: false })).toBeVisible();
         });
 
         test('LC_178: 배정 권한 미보유자 - 배정 권한 없는 사용자에게 위젯 미노출', async ({ page }) => {
-            await expect(page.getByText('검토 담당자 배정 중\' 위젯 미', { exact: false })).toBeVisible();
+            await expect(page.getByText("검토 담당자 배정 중' 위젯 미", { exact: false })).toBeVisible();
         });
 
     });
 
     test.describe('타이틀', () => {
         test('LC_179: 배정 팀 이름 - 타이틀 > 배정 팀 이름 표시', async ({ page }) => {
-            await expect(page.getByText('사용자의 배정 팀 이름(\'금융팀\')', { exact: false })).toBeVisible();
+            await expect(page.getByText("사용자의 배정 팀 이름('금융팀')", { exact: false })).toBeVisible();
         });
 
     });
@@ -241,7 +241,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 검토 담당자 �
 
     test.describe('권한 변경', () => {
         test('LC_185: 런타임 - 권한 박탈 후 새로고침 시 위젯 미노출', async ({ page }) => {
-            await expect(page.getByText('검토 담당자 배정 중\' 위젯 미', { exact: false })).toBeVisible();
+            await expect(page.getByText("검토 담당자 배정 중' 위젯 미", { exact: false })).toBeVisible();
         });
 
     });
@@ -256,7 +256,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 요청자 검토 �
 
     test.describe('위젯 노출', () => {
         test('LC_186: 위젯 노출', async ({ page }) => {
-            await expect(page.getByText('요청자 검토 중 리스트(계약검토)\' 위젯', { exact: false })).toBeVisible();
+            await expect(page.getByText("요청자 검토 중 리스트(계약검토)' 위젯", { exact: false })).toBeVisible();
         });
 
     });
@@ -275,7 +275,7 @@ test.describe('대시보드 위젯 추가 (온프레미스) - 요청자 검토 �
         });
 
         test('LC_190: 더보기 클릭 - 더보기 클릭 시 리스트 페이지 이동', async ({ page }) => {
-            await expect(page.getByText('\'요청자 검토 중\' 필터가 설정된 검토 리스트 페이지', { exact: false })).toBeVisible();
+            await expect(page.getByText("'요청자 검토 중' 필터가 설정된 검토 리스트 페이지", { exact: false })).toBeVisible();
         });
 
     });
