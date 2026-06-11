@@ -1,4 +1,5 @@
 import { browser } from 'k6/browser';
+import { check } from 'k6';
 import { URLS } from '../util/url_base_hsad.js';
 import { SELECTORS } from '../selector_hsad.js';
 import { hsadBrowserOptions, loginToDashboard } from '../common/k6_browser_helpers.js';
@@ -34,6 +35,17 @@ export default async function () {
         timestamp = getNewTimestamp();
         await page.screenshot({ path: `screenshots/${timestamp}_blacklist_draft_form.png` });
 
+        // 블랙리스트 팝업 및 페이지 상태 확인
+        const isReviewPage = page.url().includes('/clm/review') || page.url().includes('/clm');
+        const hasDialog = await page.locator('[role="dialog"]').isVisible();
+        const hasSpecialApproveBtn = await page.locator(CLM.BLACKLIST_SPECIAL_APPROVE_BUTTON).isVisible();
+
+        check(page, {
+            'BL_001: 블랙리스트 차단 관련 페이지 URL 확인': () => isReviewPage,
+            'BL_002: 블랙리스트 차단 팝업 노출 확인': () => hasDialog,
+            'BL_003: 특별 승인 요청 버튼 노출 확인': () => hasSpecialApproveBtn,
+        });
+
         if (__ENV.BLACKLIST_TEST !== 'true') {
             // 블랙리스트 차단 팝업 노출 확인만 수행
             timestamp = getNewTimestamp();
@@ -50,8 +62,20 @@ export default async function () {
 
             // 특별 승인 요청 버튼 클릭
             await page.waitForSelector(CLM.BLACKLIST_SPECIAL_APPROVE_BUTTON);
+
+            const isSpecialApproveBtnEnabled = await page.locator(CLM.BLACKLIST_SPECIAL_APPROVE_BUTTON).isEnabled();
+            check(page, {
+                'BL_004: 동의 체크 후 특별 승인 요청 버튼 활성화 확인': () => isSpecialApproveBtnEnabled,
+            });
+
             await page.locator(CLM.BLACKLIST_SPECIAL_APPROVE_BUTTON).click();
             await wait(5000);
+
+            const hasApprovalRequestedStatus = await page.locator('text=특별 승인 요청 중').isVisible();
+            check(page, {
+                'BL_005: 특별 승인 요청 중 상태 노출 확인': () => hasApprovalRequestedStatus,
+            });
+
             timestamp = getNewTimestamp();
             await page.screenshot({ path: `screenshots/${timestamp}_blacklist_approval_requested.png` });
         }
